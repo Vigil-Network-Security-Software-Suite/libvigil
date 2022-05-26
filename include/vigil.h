@@ -118,18 +118,5 @@ struct r_raw_ip_data{
 #define D_OP_NE               0xa6              // != or !
 
 
-// parse dsize operators and store the byte code in __rule
-void d_op_parser(struct rule * __rule, const char * str, int type);
-
-// actively apply dsize bytecode from __rule on rdata->pkt_len
-bool d_engine(const struct rule * __rule, const struct rule_data * rdata);
-
-/* RULE PARSING AND INITIALIZATION */
-
-// actually parse the rules
-void line_parser(const char * line);
-
-// initialize rules
-void process_rule(struct rule * r);
 
 #endif /* VIGIL_H */
