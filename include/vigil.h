@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <regex.h>
 #include <stdbool.h>
+
 #ifdef lib_pcap_pcap_h
   #include <pcap.h>
 #endif
@@ -43,7 +44,8 @@ struct rule_data{
 #define FLOW_INWARD                             70
 #define FLOW_EITHER                             71
 
-void full_decode(const unsigned char * packet, const int packet_len);
+struct rule_data * full_decode(const unsigned char * restrict packet, const int packet_len);
+void free_rdata(struct rule_data *);
 #ifdef lib_pcap_pcap_h
   void full_decode_libpcap(const unsigned char * user, const unsigned char * packet, const struct pcap_pkthdr * pkt_hdr);
 #endif
