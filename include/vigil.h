@@ -34,7 +34,7 @@ struct rule_data{
   var_header network_header;
   var_header transport_header;
   var_header application_data;
-
+  char packet_repr[256];
   unsigned char tcp_flags[8];                   // TCP flags in single character for such as
                                                 //  "S" for SYN and "A" for ACK
   int is_established;                           // whether or not the tcp session is established
