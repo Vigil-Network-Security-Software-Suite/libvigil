@@ -19,6 +19,7 @@ typedef struct {
 // this contains everything needed for rulemgr
 struct rule_data{
   unsigned char * pkt;                          // packet bytes
+  unsigned char * full_packet;
   char * src_ip_addr;                           // pointer to src address
   char * dest_ip_addr;                          // pointer to dest address
   uint32_t srcip;                               // may delete
@@ -50,6 +51,31 @@ void free_rdata(struct rule_data *);
   void full_decode_libpcap(const unsigned char * user, const unsigned char * packet, const struct pcap_pkthdr * pkt_hdr);
 #endif
 
+/* DECODING FUNCTIONS */
+
+// fully decode ethernet
+void eth_decode(struct rule_data * rule);
 
 
+
+
+
+/* Utilities */
+// raw mac address to char array
+unsigned char * mac_ntoa(const uint8_t * hw_addr);
+
+// make address bytes to char array
+unsigned char * uc_mac_ntoa(unsigned char * hw_addr);
+
+// inet_ntoa but but for raw bytes
+unsigned char * ipv4_ntoa(uint32_t ipv4addr);
+
+// uin8_t[6] to char array
+unsigned char * u8_ipv4_ntoa(uint8_t * ipv4addr);
+
+// ipv4_nto but for ipv6
+unsigned char * inet6_ntoa(uint8_t * ipv6addr);
+
+// 12:23:34:45:56 to raw integer
+void hw_addr_to_bytes(const char * str, uint8_t * output);
 #endif /* VIGIL_H */
