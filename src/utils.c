@@ -6,7 +6,7 @@ static __thread unsigned char buffer[128];
 // raw mac address to char array
 unsigned char * mac_ntoa(const uint8_t * hw_addr){
   unsigned char * __hwaddr = (unsigned char *)hw_addr;
-  sprintf(buffer,"%02x:%02x:%02x:%02x:%02x:%02x",
+  sprintf((char *)buffer,"%02x:%02x:%02x:%02x:%02x:%02x",
       __hwaddr[0], __hwaddr[1], __hwaddr[2],
       __hwaddr[3], __hwaddr[4], __hwaddr[4]
   );
@@ -24,7 +24,7 @@ unsigned char * uc_mac_ntoa(unsigned char * hw_addr){
 
 // inet_ntoa but but for raw bytes
 unsigned char * ipv4_ntoa(uint32_t ipv4addr){
-  unsigned char * ipaddr = (unsigned char *)ipv4addr;
+  unsigned char * ipaddr = (unsigned char *)&ipv4addr;
   snprintf((char *)buffer,sizeof(buffer),"%d.%d.%d.%d",
         ipaddr[0],ipaddr[1],ipaddr[2],ipaddr[3]);
   return buffer;
