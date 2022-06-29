@@ -4,9 +4,6 @@
 #include <regex.h>
 #include <stdbool.h>
 
-#ifdef lib_pcap_pcap_h
-  #include <pcap.h>
-#endif
 // variable headers
 typedef struct {
   unsigned int type;
@@ -43,13 +40,10 @@ struct rule_data{
 #define FLOW_OUTWARD                            69
 #define FLOW_INWARD                             70
 #define FLOW_EITHER                             71
-
-struct rule_data * full_decode(const unsigned char * restrict packet, const int packet_len);
+struct rule_data * quiet_decode(const unsigned char * restrict packet, const int packet_len);
+struct rule_data * print_decode(const unsigned char * restrict packet, const int packet_len);
+struct rule_data * full_decode(const unsigned char * restrict packet, const int packet_len, int type);
 void free_rdata(struct rule_data *);
-#ifdef lib_pcap_pcap_h
-  void full_decode_libpcap(const unsigned char * user, const unsigned char * packet, const struct pcap_pkthdr * pkt_hdr);
-#endif
-
 
 
 #endif /* VIGIL_H */
